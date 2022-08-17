@@ -1,0 +1,277 @@
+#:include embedding.kv
+
+
+<SettingsWindow@Screen>:
+    name: 'settings'
+
+    key_description: label_a
+    key_enter: label_b
+    warning_text: label_c
+    key_text: text_input_a
+    next_button: button_a
+
+
+    canvas.before:
+        Rectangle:
+            pos: self.pos
+            size: 600, 850
+            source: 'background.png'
+
+    canvas:
+        Color:
+            rgba: 0, 0, 0, 1
+        Rectangle:
+            pos: 25, 730
+            size: 550, 2
+        Rectangle:
+            pos: 25, 100
+            size: 550, 2
+        Rectangle:
+            pos: 60, 550
+            size: 480, 1
+        Rectangle:
+            pos: 60, 380
+            size: 480, 1
+
+    BoxLayout:
+        size: 600, 850
+        orientation: "vertical"
+
+
+        #______  Title part  ______
+
+        BoxLayout:
+            size: 600, 100
+            size_hint: None, None
+            Label:
+                text:"STEGOSURGERY - EMBEDDING"
+                font_name: 'Myla-Black(1).ttf'
+                font_size: 48
+                color: 0.533, 0, 0.082, 1
+
+        #______  Main content of page  ______
+
+        BoxLayout:
+            size: 600, 630
+            size_hint: None, None
+            orientation: "vertical"
+
+            Label:
+                size: 600, 50
+                size_hint: None, None
+                text: "Embedding - Settings"
+                halign: 'center'
+                text_size: 570, None
+                font_name: 'Myla-Black(1).ttf'
+                font_size: 28
+                color: 0, 0, 0, 1
+
+            Label:
+                size: 600, 50
+                size_hint: None, None
+                text: "Please choose encoding language"
+                halign: 'center'
+                text_size: 570, None
+                font_name: 'Myla-Black(1).ttf'
+                font_size: 28
+                color: 0, 0, 0, 1
+
+            GridLayout:
+                size: 600, 80
+                size_hint: None, None
+                cols: 2
+
+                Label:
+                    text: "ASCII (english) 1 symbol = 8 bits"
+                    size: 450, 40
+                    size_hint: None, None
+                    font_size: 28
+                    font_name: 'Myla-Black(1).ttf'
+                    halign: 'left'
+                    color: 0, 0, 0, 1
+
+                CheckBox:
+                    size: 150, 40
+                    size_hint: None, None
+                    group: "encoding_language"
+
+                    color: 0.533, 0, 0.082, 1
+                    on_active: root.choose_enc_language(self, self.active, "ASCII")
+
+                Label:
+                    text: "Unicode (any) 1 symbol = 16 bits"
+                    size: 450, 40
+                    size_hint: None, None
+                    font_size: 28
+                    font_name: 'Myla-Black(1).ttf'
+                    halign: 'left'
+                    color: 0, 0, 0, 1
+
+                CheckBox:
+                    size: 150, 40
+                    size_hint: None, None
+                    group: "encoding_language"
+                    color: 0.533, 0, 0.082, 1
+                    on_active: root.choose_enc_language(self, self.active, "Unicode")
+
+            Label:
+                size: 600, 50
+                size_hint: None, None
+                text: "Please choose number of last bits"
+                halign: 'center'
+                text_size: 570, None
+                font_name: 'Myla-Black(1).ttf'
+                font_size: 28
+                color: 0, 0, 0, 1
+
+            GridLayout:
+                size: 600, 120
+                size_hint: None, None
+                cols: 2
+
+                Label:
+                    text: "1 bit"
+                    size: 300, 40
+                    size_hint: None, None
+                    font_size: 28
+                    font_name: 'Myla-Black(1).ttf'
+                    halign: 'left'
+                    color: 0, 0, 0, 1
+
+                CheckBox:
+                    size: 300, 40
+                    size_hint: None, None
+                    group: "bits_number"
+                    color: 0.533, 0, 0.082, 1
+                    on_active: root.choose_bits_number(self, self.active, 1)
+
+                Label:
+                    text: "2 bits"
+                    size: 300, 40
+                    size_hint: None, None
+                    font_size: 28
+                    font_name: 'Myla-Black(1).ttf'
+                    halign: 'left'
+                    color: 0, 0, 0, 1
+
+                CheckBox:
+                    size: 300, 40
+                    size_hint: None, None
+                    group: "bits_number"
+                    color: 0.533, 0, 0.082, 1
+                    on_active: root.choose_bits_number(self, self.active, 2)
+
+                Label:
+                    text: "3 bits"
+                    size: 300, 40
+                    size_hint: None, None
+                    font_size: 28
+                    font_name: 'Myla-Black(1).ttf'
+                    halign: 'left'
+                    color: 0, 0, 0, 1
+
+                CheckBox:
+                    size: 300, 40
+                    size_hint: None, None
+                    group: "bits_number"
+                    active: True
+                    color: 0.533, 0, 0.082, 1
+                    on_active: root.choose_bits_number(self, self.active, 3)
+
+            BoxLayout:
+                size: 600, 40
+                size_hint: None, None
+                orientation: "horizontal"
+
+                Label:
+                    text: "Spray mode"
+                    size: 300, 40
+                    size_hint: None, None
+                    font_size: 28
+                    font_name: 'Myla-Black(1).ttf'
+                    halign: 'left'
+                    color: 0, 0, 0, 1
+
+                CheckBox:
+                    size: 300, 40
+                    size_hint: None, None
+                    color: 0.533, 0, 0.082, 1
+                    on_active: root.spray_mode(self, self.active)
+
+            Label:
+                id: label_a
+                text: ""
+                size: 600, 80
+                size_hint: None, None
+                font_size: 28
+                font_name: 'Myla-Black(1).ttf'
+                halign: 'center'
+                color: 0, 0, 0, 1
+
+
+            BoxLayout:
+                size: 600, 40
+                size_hint: None, None
+                orientation: "horizontal"
+
+                Label:
+                    id: label_b
+                    text: ""
+                    size: 300, 40
+                    size_hint: None, None
+                    font_size: 28
+                    font_name: 'Myla-Black(1).ttf'
+                    halign: 'left'
+                    color: 0, 0, 0, 1
+
+                TextInput:
+                    id: text_input_a
+                    size: 250, 40
+                    size_hint: None, None
+                    font_size: 20
+                    font_name: 'courer_new_bold.ttf'
+                    background_color: 0, 0, 0, 0
+                    text: ''
+                    disabled: True
+                    on_text: root.key_check()
+
+            Label:
+                id: label_c
+                text: ""
+                size: 600, 60
+                size_hint: None, None
+                font_size: 28
+                font_name: 'Myla-Black(1).ttf'
+                halign: 'center'
+                color: 0, 0, 0, 1
+
+
+            BoxLayout:
+                size: 600, 60
+                size_hint: None, None
+
+
+
+        #______  Bottom part  ______
+
+        BoxLayout:
+            size: 600, 100
+            size_hint: None, None
+
+            Button:
+                id: button_a
+                size: 600, 100
+                size_hint: None, None
+                text: "Next"
+                font_name: 'Myla-Black(1).ttf'
+                font_size: 36
+                color: 0, 0, 0, 1
+                background_color: 0, 0, 0, 0
+                disabled: False
+
+                on_press:
+                    self.color = 0.533, 0, 0.082, 1
+
+                on_release:
+                    self.color = 0, 0, 0, 1
+                    app.root.current = 'embedding'

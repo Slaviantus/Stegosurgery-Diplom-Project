@@ -1,0 +1,118 @@
+#:include embedding.kv
+#:include settings.kv
+
+<AutopsyWindow@Screen>:
+    name: 'autopsy'
+
+    next_button: button_a
+    loading_label: label_a
+    complete_label: label_b
+
+    on_enter: root.on_open_window()
+    on_leave: root.on_close_window()
+
+
+    canvas.before:
+        Rectangle:
+            pos: self.pos
+            size: 600, 850
+            source: 'background.png'
+
+    canvas:
+        Color:
+            rgba: 0, 0, 0, 1
+        Rectangle:
+            pos: 25, 730
+            size: 550, 2
+        Rectangle:
+            pos: 25, 100
+            size: 550, 2
+
+    BoxLayout:
+        size: 600, 850
+        orientation: "vertical"
+
+
+        #______  Title part  ______
+
+        BoxLayout:
+            size: 600, 100
+            size_hint: None, None
+            Label:
+                text:"STEGOSURGERY"
+                font_name: 'Myla-Black(1).ttf'
+                font_size: 48
+                color: 0.533, 0, 0.082, 1
+
+        #______  Main content of page  ______
+
+        BoxLayout:
+            size: 600, 630
+            size_hint: None, None
+            orientation: "vertical"
+
+            Label:
+                size: 600, 100
+                size_hint: None, None
+                text: "Document autopsy, please wait..."
+                halign: 'center'
+                text_size: 570, None
+                font_name: 'Myla-Black(1).ttf'
+                font_size: 28
+                color: 0, 0, 0, 1
+
+
+            Label:
+                id: label_a
+                size: 600, 86
+                size_hint: None, None
+                text: "Loading..."
+                halign: 'center'
+                text_size: 570, None
+                font_name: 'Myla-Black(1).ttf'
+                font_size: 28
+                color: 0, 0, 0, 1
+
+
+            Label:
+                id: label_b
+                size: 600, 100
+                size_hint: None, None
+                text: " "
+                halign: 'center'
+                text_size: 570, None
+                font_name: 'Myla-Black(1).ttf'
+                font_size: 28
+                color: 0, 0, 0, 1
+
+
+            BoxLayout:
+                size: 600, 344
+                size_hint: None, None
+
+
+
+
+        #______  Bottom part  ______
+
+        BoxLayout:
+            size: 600, 100
+            size_hint: None, None
+
+            Button:
+                id: button_a
+                size: 600, 100
+                size_hint: None, None
+                text: " "
+                font_name: 'Myla-Black(1).ttf'
+                font_size: 36
+                color: 0, 0, 0, 1
+                background_color: 0, 0, 0, 0
+                disabled: True
+
+                on_press:
+                    self.color = 0.533, 0, 0.082, 1
+
+                on_release:
+                    self.color = 0, 0, 0, 1
+                    app.root.current = 'settings'

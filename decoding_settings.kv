@@ -1,0 +1,339 @@
+#:include decoding.kv
+
+
+<Decoding_Settings_Window@Screen>:
+
+    name: "decoding_settings"
+
+    key_enter: label_a
+    key_text: text_input_a
+    empty_doc_label: label_b
+    dec_anyway_label: label_c
+    dec_anyway: check_box_a
+    ascii_label: label_d
+    ascii_check_box: check_box_b
+    unicode_label: label_e
+    unicode_check_box: check_box_c
+    bit1_label: label_f
+    bit1_check_box: check_box_d
+    bit2_label: label_g
+    bit2_check_box: check_box_e
+    bit3_label: label_h
+    bit3_check_box: check_box_f
+    decode_button: button_a
+
+    on_enter: root.on_open_window()
+
+
+    canvas.before:
+        Rectangle:
+            pos: self.pos
+            size: 600, 850
+            source: 'background.png'
+
+    canvas:
+        Color:
+            rgba: 0, 0, 0, 1
+        Rectangle:
+            pos: 25, 730
+            size: 550, 2
+        Rectangle:
+            pos: 25, 100
+            size: 550, 2
+        Rectangle:
+            pos: 60, 475
+            size: 480, 1
+        Rectangle:
+            pos: 60, 385
+            size: 480, 1
+
+
+    BoxLayout:
+        size: 600, 850
+        orientation: "vertical"
+
+
+        #______  Title part  ______
+
+        BoxLayout:
+            size: 600, 100
+            size_hint: None, None
+            Label:
+                text:"STEGOSURGERY - DECODING"
+                font_name: 'Myla-Black(1).ttf'
+                font_size: 48
+                color: 0.533, 0, 0.082, 1
+
+        #______  Main content of page  ______
+
+        BoxLayout:
+            size: 600, 630
+            size_hint: None, None
+            orientation: "vertical"
+
+            Label:
+                size: 600, 50
+                size_hint: None, None
+                text: "Decoding - Settings"
+                halign: 'center'
+                text_size: 570, None
+                font_name: 'Myla-Black(1).ttf'
+                font_size: 28
+                color: 0, 0, 0, 1
+
+            Label:
+                size: 600, 50
+                size_hint: None, None
+                text: "Please choose the decoding way"
+                halign: 'center'
+                text_size: 570, None
+                font_name: 'Myla-Black(1).ttf'
+                font_size: 28
+                color: 0, 0, 0, 1
+
+            GridLayout:
+                size: 600, 80
+                size_hint: None, None
+                cols: 2
+
+                Label:
+                    text: "Classic decoding"
+                    size: 300, 40
+                    size_hint: None, None
+                    font_size: 28
+                    font_name: 'Myla-Black(1).ttf'
+                    halign: 'left'
+                    color: 0, 0, 0, 1
+
+                CheckBox:
+                    size: 300, 40
+                    size_hint: None, None
+                    group: "decoding_way"
+                    color: 0.533, 0, 0.082, 1
+                    on_active: root.choose_decoding_way(self, self.active, "Classic")
+
+                Label:
+                    text: "Spray decoding"
+                    size: 300, 40
+                    size_hint: None, None
+                    font_size: 28
+                    font_name: 'Myla-Black(1).ttf'
+                    halign: 'left'
+                    color: 0, 0, 0, 1
+
+                CheckBox:
+                    size: 300, 40
+                    size_hint: None, None
+                    group: "decoding_way"
+                    color: 0.533, 0, 0.082, 1
+                    on_active: root.choose_decoding_way(self, self.active, "Spray")
+
+            BoxLayout:
+                size: 600, 20
+                size_hint: None, None
+                orientation: "vertical"
+
+            BoxLayout:
+                size: 600, 40
+                size_hint: None, None
+                orientation: "horizontal"
+
+                Label:
+                    id: label_a
+                    text: ""
+                    size: 300, 40
+                    size_hint: None, None
+                    font_size: 28
+                    font_name: 'Myla-Black(1).ttf'
+                    halign: 'left'
+                    color: 0, 0, 0, 1
+
+                TextInput:
+                    id: text_input_a
+                    size: 250, 40
+                    size_hint: None, None
+                    font_size: 20
+                    font_name: 'courer_new_bold.ttf'
+                    background_color: 0, 0, 0, 0
+                    text: ''
+                    disabled: True
+                    on_text: root.key_check()
+
+
+            Label:
+                id: label_b
+                size: 600, 50
+                size_hint: None, None
+                text: ""
+                halign: 'center'
+                text_size: 570, None
+                font_name: 'Myla-Black(1).ttf'
+                font_size: 28
+                color: 0, 0, 0, 1
+
+
+            BoxLayout:
+                size: 600, 40
+                size_hint: None, None
+                orientation: "horizontal"
+
+                Label:
+                    id: label_c
+                    text: ""
+                    size: 300, 40
+                    size_hint: None, None
+                    font_size: 28
+                    font_name: 'Myla-Black(1).ttf'
+                    halign: 'left'
+                    color: 0, 0, 0, 1
+
+                CheckBox:
+                    id: check_box_a
+                    size: 300, 50
+                    size_hint: None, None
+                    color: 0.533, 0, 0.082, 1
+                    disabled: True
+                    on_active: root.manual_decoding(self, self.active)
+
+            BoxLayout:
+                size: 600, 10
+                size_hint: None, None
+                orientation: "vertical"
+
+            GridLayout:
+                size: 600, 80
+                size_hint: None, None
+                cols: 2
+
+                Label:
+                    id: label_d
+                    text: ""
+                    size: 450, 40
+                    size_hint: None, None
+                    font_size: 28
+                    font_name: 'Myla-Black(1).ttf'
+                    halign: 'left'
+                    color: 0, 0, 0, 1
+
+                CheckBox:
+                    id: check_box_b
+                    size: 150, 40
+                    size_hint: None, None
+                    group: "encoding_language"
+
+                    color: 0.533, 0, 0.082, 1
+                    on_active: root.choose_enc_language(self, self.active, "ASCII")
+
+                Label:
+                    id: label_e
+                    text: ""
+                    size: 450, 40
+                    size_hint: None, None
+                    font_size: 28
+                    font_name: 'Myla-Black(1).ttf'
+                    halign: 'left'
+                    color: 0, 0, 0, 1
+
+                CheckBox:
+                    id: check_box_c
+                    size: 150, 40
+                    size_hint: None, None
+                    group: "encoding_language"
+                    color: 0.533, 0, 0.082, 1
+                    on_active: root.choose_enc_language(self, self.active, "Unicode")
+
+            BoxLayout:
+                size: 600, 10
+                size_hint: None, None
+                orientation: "vertical"
+
+            GridLayout:
+                size: 600, 120
+                size_hint: None, None
+                cols: 2
+
+                Label:
+                    id: label_f
+                    text: ""
+                    size: 300, 40
+                    size_hint: None, None
+                    font_size: 28
+                    font_name: 'Myla-Black(1).ttf'
+                    halign: 'left'
+                    color: 0, 0, 0, 1
+
+                CheckBox:
+                    id: check_box_d
+                    size: 300, 40
+                    size_hint: None, None
+                    group: "bits_number"
+                    color: 0.533, 0, 0.082, 1
+                    on_active: root.choose_bits_number(self, self.active, 1)
+
+                Label:
+                    id: label_g
+                    text: ""
+                    size: 300, 40
+                    size_hint: None, None
+                    font_size: 28
+                    font_name: 'Myla-Black(1).ttf'
+                    halign: 'left'
+                    color: 0, 0, 0, 1
+
+                CheckBox:
+                    id: check_box_e
+                    size: 300, 40
+                    size_hint: None, None
+                    group: "bits_number"
+                    color: 0.533, 0, 0.082, 1
+                    on_active: root.choose_bits_number(self, self.active, 2)
+
+                Label:
+                    id: label_h
+                    text: ""
+                    size: 300, 40
+                    size_hint: None, None
+                    font_size: 28
+                    font_name: 'Myla-Black(1).ttf'
+                    halign: 'left'
+                    color: 0, 0, 0, 1
+
+                CheckBox:
+                    id: check_box_f
+                    size: 300, 40
+                    size_hint: None, None
+                    group: "bits_number"
+                    color: 0.533, 0, 0.082, 1
+                    on_active: root.choose_bits_number(self, self.active, 3)
+
+
+            BoxLayout:
+                size: 600, 70
+                size_hint: None, None
+                orientation: "vertical"
+
+
+        #______  Bottom part  ______
+
+        BoxLayout:
+            size: 600, 100
+            size_hint: None, None
+
+
+            Button:
+                id: button_a
+                size: 600, 100
+                size_hint: None, None
+                text: ""
+                font_name: 'Myla-Black(1).ttf'
+                font_size: 36
+                color: 0, 0, 0, 1
+                background_color: 0, 0, 0, 0
+                disabled: True
+
+                on_press:
+                    self.color = 0.533, 0, 0.082, 1
+
+                on_release:
+                    self.color = 0, 0, 0, 1
+                    app.root.current = 'decoding'

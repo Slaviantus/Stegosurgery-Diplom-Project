@@ -1,0 +1,175 @@
+
+#:include autopsy.kv
+#:include decoding_settings.kv
+
+
+#:import FadeTransition kivy.uix.screenmanager.FadeTransition
+
+
+WindowManager:
+    StartWindow:
+    AutopsyWindow:
+    SettingsWindow:
+    EmbeddingWindow:
+    ImplementationWindow:
+    StitchingWindow:
+    Decoding_Settings_Window:
+    DecodingWindow:
+#================================ START PAGE ================================
+
+<StartWindow>:
+    name: "start"
+
+    file_path_label: label_a
+    choose_way: label_b
+    embedding_button: button_a
+    decoding_button: button_b
+
+    canvas.before:
+        Rectangle:
+            pos: self.pos
+            size: 600, 850
+            source: 'background.png'
+
+    canvas:
+        Color:
+            rgba: 0, 0, 0, 1
+        Rectangle:
+            pos: 25, 730
+            size: 550, 2
+        Rectangle:
+            pos: 25, 100
+            size: 550, 2
+        Rectangle:
+            pos: 60, 600
+            size: 480, 1
+        Rectangle:
+            pos: 60, 365
+            size: 480, 1
+        Rectangle:
+            pos: 60, 435
+            size: 480, 1
+
+    BoxLayout:
+        size: 600, 850
+        orientation: "vertical"
+
+        #______  Title part  ______
+
+        BoxLayout:
+            size: 600, 100
+            size_hint: None, None
+            Label:
+                text:"STEGOSURGERY"
+                font_name: 'Myla-Black(1).ttf'
+                font_size: 48
+                color: 0.533, 0, 0.082, 1
+
+        #______  Main content of page  ______
+
+        BoxLayout:
+            size: 600, 630
+            size_hint: None, None
+            orientation: "vertical"
+
+            Label:
+                size: 600, 150
+                size_hint: None, None
+                text: "Please download your MS Word document with the file format .docx"
+                halign: 'center'
+                text_size: 570, None
+                font_name: 'Myla-Black(1).ttf'
+                font_size: 28
+                color: 0, 0, 0, 1
+
+            Label:
+                id: label_a
+                size: 600, 165
+                size_hint: None, None
+                text: " "
+                halign: 'center'
+                text_size: 550, None
+                font_name: 'courer_new_bold.ttf'
+                font_size: 20
+                color: 0, 0, 0, 1
+
+            Button:
+                size: 600, 70
+                size_hint: None, None
+                text:"Load"
+                font_name: 'Myla-Black(1).ttf'
+                font_size: 36
+                color: 0, 0, 0, 1
+                background_color: 0, 0, 0, 0
+
+                on_press:
+                    self.color = 0.533, 0, 0.082, 1
+
+                on_release:
+                    self.color = 0, 0, 0, 1
+                    root.load_file()
+
+            Label:
+                id: label_b
+                size: 600, 100
+                size_hint: None, None
+                text: " "
+                halign: 'center'
+                text_size: 570, None
+                font_name: 'Myla-Black(1).ttf'
+                font_size: 28
+                color: 0, 0, 0, 1
+
+            BoxLayout:
+                size: 600, 165
+                size_hint: None, None
+                orientation: "horizontal"
+
+                Button:
+                    id: button_a
+                    size: 300, 145
+                    size_hint: None, None
+                    text: " "
+                    font_name: 'Myla-Black(1).ttf'
+                    font_size: 36
+                    color: 0, 0, 0, 1
+                    background_color: 0, 0, 0, 0
+                    disabled: True
+
+                    on_press:
+                        self.color = 0.533, 0, 0.082, 1
+
+
+                    on_release:
+                        self.color = 0, 0, 0, 1
+                        root.manager.transition = FadeTransition()
+                        app.root.current = "autopsy"
+
+                Button:
+                    id: button_b
+                    size: 300, 145
+                    size_hint: None, None
+                    text: " "
+                    font_name: 'Myla-Black(1).ttf'
+                    font_size: 36
+                    color: 0, 0, 0, 1
+                    background_color: 0, 0, 0, 0
+                    disabled: True
+
+                    on_press:
+                        self.color = 0.533, 0, 0.082, 1
+
+                    on_release:
+                        self.color = 0, 0, 0, 1
+                        root.manager.transition = FadeTransition()
+                        app.root.current = "decoding_settings"
+
+
+
+        #______  Bottom part  ______
+
+        BoxLayout:
+            size: 600, 100
+            size_hint: None, None
+
+

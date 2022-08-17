@@ -1,0 +1,203 @@
+#:include settings.kv
+#:include implementation.kv
+
+
+<EmbeddingWindow@Screen>:
+    name: 'embedding'
+
+    text_input: text_input_a
+    enc_information: label_a
+    bits_information: label_b
+    message_len: label_c
+    available_sym: label_d
+
+    on_enter: root.on_open_window()
+    #on_leave: root.on_close_window()
+
+
+    canvas.before:
+        Rectangle:
+            pos: self.pos
+            size: 600, 850
+            source: 'background.png'
+
+    canvas:
+        Color:
+            rgba: 0, 0, 0, 1
+        Rectangle:
+            pos: 25, 730
+            size: 550, 2
+        Rectangle:
+            pos: 25, 100
+            size: 550, 2
+        Rectangle:
+            pos: 60, 650
+            size: 480, 1
+
+    BoxLayout:
+        size: 600, 850
+        orientation: "vertical"
+
+
+        #______  Title part  ______
+
+        BoxLayout:
+            size: 600, 100
+            size_hint: None, None
+            Label:
+                text:"STEGOSURGERY - EMBEDDING"
+                font_name: 'Myla-Black(1).ttf'
+                font_size: 48
+                color: 0.533, 0, 0.082, 1
+
+        #______  Main content of page  ______
+
+        BoxLayout:
+            size: 600, 630
+            size_hint: None, None
+            orientation: "vertical"
+
+            Label:
+                id: label_a
+                size: 600, 40
+                size_hint: None, None
+                text: ""
+                halign: 'center'
+                text_size: 570, None
+                font_name: 'Myla-Black(1).ttf'
+                font_size: 28
+                color: 0, 0, 0, 1
+
+            Label:
+                id: label_b
+                size: 600, 40
+                size_hint: None, None
+                text: ""
+                halign: 'center'
+                text_size: 570, None
+                font_name: 'Myla-Black(1).ttf'
+                font_size: 28
+                color: 0, 0, 0, 1
+
+            Label:
+                text: "Please enter stego message bellow"
+                size: 600, 50
+                size_hint: None, None
+                font_size: 28
+                font_name: 'Myla-Black(1).ttf'
+                text_size: 570, None
+                halign: 'center'
+                color: 0, 0, 0, 1
+
+            BoxLayout:
+                size: 600, 30
+                size_hint: None, None
+                orientation: "horizontal"
+
+                Label:
+                    id: label_c
+                    text: "0"
+                    size: 290, 30
+                    size_hint: None, None
+                    font_size: 28
+                    font_name: 'Myla-Black(1).ttf'
+                    #text_size: 570, None
+                    halign: 'right'
+                    color: 0, 0, 0, 1
+
+                Label:
+                    text: "/"
+                    size: 20, 30
+                    size_hint: None, None
+                    font_size: 28
+                    font_name: 'Myla-Black(1).ttf'
+                    #text_size: 570, None
+                    halign: 'center'
+                    color: 0, 0, 0, 1
+
+                Label:
+                    id: label_d
+                    text: ""
+                    size: 290, 30
+                    size_hint: None, None
+                    font_size: 28
+                    font_name: 'Myla-Black(1).ttf'
+                    #text_size: 570, None
+                    halign: 'left'
+                    color: 0, 0, 0, 1
+
+            BoxLayout:
+                size: 600, 470
+                size_hint: None, None
+                orientation: "horizontal"
+
+                BoxLayout:
+                    size: 25, 420
+                    size_hint: None, None
+                    orientation: "vertical"
+
+                ScrollView:
+                    id: scrlv
+                    TextInput:
+                        id: text_input_a
+                        size: 550, 420
+                        size_hint: None, None
+                        font_size: 20
+                        font_name: 'courer_new_bold.ttf'
+                        height: max( (len(self._lines)+1) * self.line_height, scrlv.height)
+                        background_color: 0, 0, 0, 0
+                        text: ''
+                        on_text: root.text_calc()
+
+                BoxLayout:
+                    size: 25, 420
+                    size_hint: None, None
+                    orientation: "vertical"
+
+
+        #______  Bottom part  ______
+
+        BoxLayout:
+            size: 600, 100
+            size_hint: None, None
+            orientation: "horizontal"
+
+
+            Button:
+                size: 300, 100
+                size_hint: None, None
+                text: "Back"
+                font_name: 'Myla-Black(1).ttf'
+                font_size: 36
+                color: 0, 0, 0, 1
+                background_color: 0, 0, 0, 0
+
+                on_press:
+                    self.color = 0.533, 0, 0.082, 1
+
+                on_release:
+                    self.color = 0, 0, 0, 1
+                    app.root.current = 'settings'
+
+
+
+            Button:
+                size: 300, 100
+                size_hint: None, None
+                text: "Next"
+                font_name: 'Myla-Black(1).ttf'
+                font_size: 36
+                color: 0, 0, 0, 1
+                background_color: 0, 0, 0, 0
+
+                on_press:
+                    self.color = 0.533, 0, 0.082, 1
+
+                on_release:
+                    self.color = 0, 0, 0, 1
+                    root.on_next_button()
+                    app.root.current = 'implementation'
+
+
+
+
